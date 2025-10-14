@@ -51,11 +51,14 @@ Create `server/.env` with:
 
 ```
 POLYGON_API_KEY=your_polygon_api_key
-OPENAI_API_KEY=your_openai_api_key
-# Optional tuning
-OPENAI_MODEL=gpt-3.5-turbo
-OPENAI_MAX_RETRIES=3
-OPENAI_MAX_TOKENS=800
+# OpenRouter API key preferred; will fall back to OPENAI_API_KEY if present
+OPENROUTER_API_KEY=your_openrouter_api_key
+OPENAI_API_KEY=optional_fallback_key
+
+# Optional tuning (OpenRouter values take precedence if provided)
+OPENROUTER_MODEL=openrouter/auto
+OPENROUTER_MAX_RETRIES=3
+OPENROUTER_MAX_TOKENS=800
 ```
 
 ### API Endpoints

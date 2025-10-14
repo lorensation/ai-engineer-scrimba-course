@@ -1,6 +1,6 @@
 import express from 'express';
 import { fetchStockData } from '../services/polygonService.js';
-import { generateReport as generateOpenAIReport } from '../services/openaiService_v2.js';
+import { generateReport as generateOpenRouterReport } from '../services/openrouterService.js';
 
 export const generateReport = async (req, res) => {
   try {
@@ -10,7 +10,7 @@ export const generateReport = async (req, res) => {
       return res.status(400).json({ status: 'error', message: 'No stock data provided' });
     }
 
-    const report = await generateOpenAIReport(stockData);
+  const report = await generateOpenRouterReport(stockData);
     res.json({ status: 'success', report });
   } catch (error) {
     res.status(500).json({ status: 'error', message: error.message });

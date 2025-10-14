@@ -62,3 +62,80 @@ export const handleError = (error) => {
   console.error('An error occurred:', error);
   return { status: 'error', message: error.message || 'An unknown error occurred' };
 };
+
+// Very small markdown-ish formatter for OpenAI/OpenRouter responses
+// Supports:
+// - Lines starting with '## ' or '**Title**' as headings
+// - '**bold**' segments
+// - Lines starting with '-' or '*' as bullet items
+// - Paragraphs separated by blank lines
+export const formatMarkdownishToHTML = (text) => {
+  if (!text || typeof text !== 'string') return '';
+
+  // Normalize newlines
+  const lines = text.replace(/\r\n?/g, '\n').split('\n');
+
+  const html = [];
+  let inList = false;
+
+  const flushList = () => {
+    if (inList) {
+      html.push('</ul>');
+      inList = false;
+    }
+  };
+
+  for (let raw of lines) {
+    const line = raw.trim();
+    if (!line) {
+      // Blank line => paragraph break
+      flushList();
+      html.push('<br/>');
+      continue;
+    }
+
+    // Heading patterns
+    if (line.startsWith('## ')) {
+      flushList();
+      const content = line.slice(3);
+      html.push(`<h4>${escapeHtml(content)}</h4>`);
+      continue;
+    }
+
+    // Some models output headings like '**Overview**'
+    const headingMatch = line.match(/^\*\*(.+?)\*\*:?$/);
+    if (headingMatch && headingMatch[1].length < 60) {
+      flushList();
+      html.push(`<h4>${escapeHtml(headingMatch[1])}</h4>`);
+      continue;
+    }
+
+    // Bullet list
+    if (line.startsWith('- ') || line.startsWith('* ')) {
+      if (!inList) {
+        html.push('<ul>');
+        inList = true;
+      }
+      const item = line.replace(/^[-*]\s+/, '');
+      html.push(`<li>${inlineBold(escapeHtml(item))}</li>`);
+      continue;
+    }
+
+    // Fallback paragraph line
+    flushList();
+    html.push(`<p>${inlineBold(escapeHtml(line))}</p>`);
+  }
+
+  flushList();
+  return html.join('\n');
+};
+
+const inlineBold = (s) => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+const escapeHtml = (s) =>
+  s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');

@@ -1,4 +1,6 @@
 // Report display utilities - vanilla JavaScript
+import { formatMarkdownishToHTML } from '../utils/helpers.js';
+
 export const displayReport = (container, report, stockNames = '') => {
   if (!container) return;
   
@@ -7,10 +9,11 @@ export const displayReport = (container, report, stockNames = '') => {
     return;
   }
   
+  const formatted = formatMarkdownishToHTML(report);
   container.innerHTML = `
     <h3>AI Financial Report</h3>
     ${stockNames ? `<h4>Analysis for: ${stockNames}</h4>` : ''}
-    <div class="report-content">${report}</div>
+    <div class="report-content">${formatted}</div>
   `;
 };
 

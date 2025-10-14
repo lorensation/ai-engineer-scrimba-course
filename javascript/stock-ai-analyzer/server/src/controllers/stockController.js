@@ -1,5 +1,5 @@
 import { fetchStockData as polygonFetchStockData, resolveTicker as polygonResolveTicker } from '../services/polygonService.js';
-import { generateReport as openaiGenerateReport, OpenAIRateLimitError } from '../services/openaiService_v2.js';
+import { generateReport as openrouterGenerateReport, RateLimitError } from '../services/openrouterService.js';
 
 export const resolveTicker = async (req, res) => {
   const { q } = req.query;
@@ -62,12 +62,12 @@ export const generateMultiStockReport = async (req, res) => {
     console.log('Fetched data for all stocks:', allStockData);
     
     // Generate combined report
-    const report = await openaiGenerateReport(allStockData);
+  const report = await openrouterGenerateReport(allStockData);
     res.json({ status: 'success', report });
     
   } catch (error) {
     console.error('Multi-stock report generation failed:', error);
-    if (error?.isRateLimit) {
+    if (error?.isRateLimit || error instanceof RateLimitError) {
       if (error.retryAfterSeconds) {
         res.set('Retry-After', `${error.retryAfterSeconds}`);
       }

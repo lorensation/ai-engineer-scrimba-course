@@ -175,6 +175,24 @@ button:hover {
   line-height: 1.6;
 }
 
+.report-content h4 {
+  margin: 14px 0 8px;
+  font-size: 18px;
+}
+
+.report-content p {
+  margin: 6px 0;
+}
+
+.report-content ul {
+  padding-left: 20px;
+  margin: 6px 0 10px;
+}
+
+.report-content li {
+  margin: 4px 0;
+}
+
 pre {
   background-color: #f8f9fa;
   padding: 15px;
