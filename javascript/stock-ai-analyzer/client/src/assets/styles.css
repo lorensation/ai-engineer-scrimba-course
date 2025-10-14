@@ -1,0 +1,185 @@
+/* Stock AI Analyzer Styles */
+
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+#app {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#stock-selection {
+  margin-bottom: 30px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+#ticker-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 300px;
+  flex: 1;
+}
+
+.selected-stocks {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  min-height: 60px;
+}
+
+.selected-stocks:empty::before {
+  content: "No stocks selected. Add up to 3 stocks to analyze.";
+  color: #666;
+  font-style: italic;
+}
+
+.stock-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #007cba;
+  color: white;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.remove-stock {
+  background-color: transparent;
+  border: none;
+  color: white;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-stock:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.generate-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.generate-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.generate-btn:disabled:hover {
+  background-color: #ccc;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007cba;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #005a87;
+}
+
+#loading-spinner {
+  text-align: center;
+  font-weight: bold;
+  color: #007cba;
+  margin: 20px 0;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #007cba;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hidden {
+  display: none;
+}
+
+.no-report {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+.error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.report-content {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 4px;
+  border-left: 4px solid #007cba;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+pre {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}

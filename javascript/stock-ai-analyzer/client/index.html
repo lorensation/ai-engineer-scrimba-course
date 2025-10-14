@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock AI Analyzer</title>
+    <link rel="stylesheet" href="./src/assets/styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Stock AI Analyzer</h1>
+            <p>Get concise financial reports using AI and stock data.</p>
+        </header>
+        <main>
+            <section id="stock-selection">
+                <div class="input-group">
+                    <input type="text" id="ticker-input" placeholder="Enter stock ticker or company name" />
+                    <button type="button" id="add-stock">Add Stock</button>
+                </div>
+                <div id="selected-stocks" class="selected-stocks">
+                    <!-- Selected stocks will appear here -->
+                </div>
+                <button type="button" id="generate-report" class="generate-btn" disabled>Generate Report</button>
+            </section>
+            <section id="report">
+                <h2>Financial Report</h2>
+                <div id="result-display"></div>
+                <div id="loading-spinner" class="hidden">Loading...</div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2023 Stock AI Analyzer</p>
+        </footer>
+    </div>
+    <script src="./src/main.js" type="module"></script>
+</body>
+</html>

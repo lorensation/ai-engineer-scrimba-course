@@ -1,0 +1,24 @@
+{
+  "name": "stock-ai-analyzer",
+  "version": "1.0.0",
+  "description": "A web application that integrates with the Polygon.io stocks API and OpenAI for generating concise financial reports.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "dotenv": "^10.0.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "jest": "^27.0.6"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "MIT"
+}

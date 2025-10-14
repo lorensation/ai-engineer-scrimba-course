@@ -1,0 +1,27 @@
+{
+  "name": "stock-ai-analyzer",
+  "version": "1.0.0",
+  "description": "A web application that integrates with the Polygon.io stocks API and OpenAI for generating concise financial reports.",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "vite": "^2.6.4",
+    "eslint": "^7.32.0",
+    "prettier": "^2.4.1"
+  },
+  "keywords": [
+    "stocks",
+    "financial",
+    "openai",
+    "polygon"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
