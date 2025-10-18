@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_title }} - Translator</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.87 15.07L10.33 12.56L10.36 12.53C12.1 10.59 13.34 8.36 14.07 6H17V4H10V2H8V4H1V6H12.17C11.5 7.92 10.44 9.75 9 11.35C8.07 10.32 7.3 9.19 6.69 8H4.69C5.42 9.63 6.42 11.17 7.67 12.56L2.58 17.58L4 19L9 14L12.11 17.11L12.87 15.07ZM18.5 10H16.5L12 22H14L15.12 19H19.87L21 22H23L18.5 10ZM15.88 17L17.5 12.67L19.12 17H15.88Z" fill="currentColor"/>
+                    </svg>
+                    PollyGlot
+                </h1>
+                <div class="theme-toggle">
+                    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
+                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="5"/>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="translator-card">
+                <!-- Language Selection -->
+                <div class="language-controls">
+                    <div class="language-select-group">
+                        <label for="source-lang" class="language-label">From</label>
+                        <select id="source-lang" class="language-select">
+                            <option value="auto">Auto-detect</option>
+                            <option value="en">English</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="it">Italian</option>
+                            <option value="pt">Portuguese</option>
+                            <option value="ru">Russian</option>
+                            <option value="ja">Japanese</option>
+                            <option value="ko">Korean</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ar">Arabic</option>
+                            <option value="hi">Hindi</option>
+                            <option value="nl">Dutch</option>
+                            <option value="sv">Swedish</option>
+                            <option value="da">Danish</option>
+                            <option value="no">Norwegian</option>
+                            <option value="fi">Finnish</option>
+                            <option value="pl">Polish</option>
+                            <option value="tr">Turkish</option>
+                        </select>
+                    </div>
+
+                    <button id="swap-languages" class="swap-btn" aria-label="Swap languages">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M16 17L21 12L16 7V10H4V14H16V17Z"/>
+                            <path d="M8 7L3 12L8 17V14H20V10H8V7Z"/>
+                        </svg>
+                    </button>
+
+                    <div class="language-select-group">
+                        <label for="target-lang" class="language-label">To</label>
+                        <select id="target-lang" class="language-select">
+                            <option value="en" selected>English</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="it">Italian</option>
+                            <option value="pt">Portuguese</option>
+                            <option value="ru">Russian</option>
+                            <option value="ja">Japanese</option>
+                            <option value="ko">Korean</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ar">Arabic</option>
+                            <option value="hi">Hindi</option>
+                            <option value="nl">Dutch</option>
+                            <option value="sv">Swedish</option>
+                            <option value="da">Danish</option>
+                            <option value="no">Norwegian</option>
+                            <option value="fi">Finnish</option>
+                            <option value="pl">Polish</option>
+                            <option value="tr">Turkish</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Input Section -->
+                <div class="input-section">
+                    <div class="input-container">
+                        <textarea
+                            id="input-text"
+                            class="input-textarea"
+                            placeholder="Enter text to translate..."
+                            maxlength="5000"
+                        ></textarea>
+                        <div class="input-footer">
+                            <div class="char-counter">
+                                <span id="char-count">0</span> / 5000
+                            </div>
+                            <button id="translate-btn" class="translate-btn">
+                                <span class="btn-text">Translate</span>
+                                <span class="loading-spinner" id="loading-spinner">
+                                    <svg width="16" height="16" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                                            <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
+                                            <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
+                                        </circle>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output Section -->
+                <div class="output-section" id="output-section">
+                    <div class="output-container">
+                        <div class="output-text" id="output-text" aria-live="polite">
+                            Translation will appear here...
+                        </div>
+                        <div class="output-actions">
+                            <button id="copy-btn" class="action-btn" aria-label="Copy to clipboard">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4A2 2 0 0 1 2 13V4A2 2 0 0 1 4 2H13A2 2 0 0 1 15 4V5"/>
+                                </svg>
+                                Copy
+                            </button>
+                            <button id="download-btn" class="action-btn" aria-label="Download as text file">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 15V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V15"/>
+                                    <polyline points="7,10 12,15 17,10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model Selection -->
+                <div class="model-section">
+                    <label for="model-select" class="model-label">Model:</label>
+                    <select id="model-select" class="model-select">
+                        <option value="{{ default_model }}" selected>{{ default_model }}</option>
+                        <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet</option>
+                        <option value="openai/gpt-4o">GPT-4o</option>
+                        <option value="google/gemini-pro-1.5">Gemini Pro 1.5</option>
+                        <option value="meta-llama/llama-3.1-8b-instruct">Llama 3.1 8B</option>
+                        <option value="mistralai/mistral-7b-instruct">Mistral 7B</option>
+                    </select>
+                </div>
+
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <div class="status-item" id="latency-status">
+                        <span class="status-label">Latency:</span>
+                        <span class="status-value">-</span>
+                    </div>
+                    <div class="status-item" id="tokens-status">
+                        <span class="status-label">Tokens:</span>
+                        <span class="status-value">-</span>
+                    </div>
+                    <div class="status-message" id="status-message"></div>
+                </div>
+            </div>
+
+            <!-- History Panel -->
+            <div class="history-panel" id="history-panel">
+                <div class="history-header">
+                    <h3>Recent Translations</h3>
+                    <button id="clear-history" class="clear-btn">Clear</button>
+                </div>
+                <div class="history-list" id="history-list">
+                    <div class="history-empty">No translations yet</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Toast Notifications -->
+        <div class="toast-container" id="toast-container"></div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
