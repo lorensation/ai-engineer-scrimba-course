@@ -1,0 +1,16 @@
+{
+  "name": "object-detection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lorensation",
+  "license": "ISC",
+  "dependencies": {
+    "@huggingface/transformers": "^3.7.5",
+    "@xenova/transformers": "^2.8.0",
+    "dotenv": "^17.2.3"
+  }
+}

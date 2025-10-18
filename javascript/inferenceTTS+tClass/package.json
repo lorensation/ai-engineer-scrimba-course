@@ -1,0 +1,17 @@
+{
+  "name": "huggface",
+  "version": "1.0.0",
+  "description": "huggingface oss models usage",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "lorensation",
+  "license": "ISC",
+  "dependencies": {
+    "@huggingface/inference": "^4.11.3",
+    "@huggingface/transformers": "^3.7.5",
+    "dotenv": "^17.2.3"
+  }
+}
